@@ -1,9 +1,9 @@
 # SentinelGraph — AI-Powered Early-Warning System for Coordinated Merchant Abuse
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/razorpay-buildathon/sentinelgraph)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/suryakshar1205/sentinelgraph)
 [![Track](https://img.shields.io/badge/Razorpay_Buildathon_2026-Track_02:_AI_Risk_Manager-blue.svg)](https://razorpay.com)
-[![Safety](https://img.shields.io/badge/Safety-Strictly_Defense--Only-success.svg)](https://github.com/razorpay-buildathon/sentinelgraph)
-[![Tests](https://img.shields.io/badge/Tests-23%20passed-brightgreen.svg)](https://github.com/razorpay-buildathon/sentinelgraph)
+[![Safety](https://img.shields.io/badge/Safety-Strictly_Defense--Only-success.svg)](https://github.com/suryakshar1205/sentinelgraph)
+[![Tests](https://img.shields.io/badge/Tests-23%20passed-brightgreen.svg)](https://github.com/suryakshar1205/sentinelgraph)
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-009688.svg)](https://fastapi.tiangolo.com)
 [![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B.svg)](https://streamlit.io)
