@@ -1,0 +1,11 @@
+{
+  "dataset_version": "1.0.0",
+  "generation_seed": 20260827,
+  "generation_timestamp": "2026-08-27T18:03:45.094175",
+  "total_transactions": 295661,
+  "fraud_rate": 0.02341194814331278,
+  "num_coordinated_rings": 48,
+  "schema_version": "2026.08.27",
+  "start_time": "2026-08-01T00:18:32.009730",
+  "end_time": "2026-08-17T18:10:49.250267"
+}
