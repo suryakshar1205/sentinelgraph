@@ -90,24 +90,24 @@ To guarantee honest evaluation, SentinelGraph enforces strict point-in-time calc
 
 ### 4. Mathematical Formulations
 
-#### Dynamic Graph Coordination Score ($S_{graph}$)
+#### Dynamic Graph Coordination Score ($S_{\text{graph}}$)
 Measures non-linear entity reuse and multi-account concentration:
-$$S_{graph} = \\min\\left(1.0, \\; \\left(w_d \\frac{\\max(0, N_d - 1)}{4} + w_c \\frac{\\max(0, N_c - 1)}{2} + w_{ip} \\frac{\\max(0, N_{ip} - 2)}{10}\\right) \\times \\mu_{high}\\right)$$
-where $N_d, N_c, N_{ip}$ are the distinct accounts linked to the device, payment card, and IP at timestamp $t$.
+$$S_{\text{graph}} = \min\left(1.0, \; \left(w_d \frac{\max(0, N_d - 1)}{4} + w_c \frac{\max(0, N_c - 1)}{2} + w_{\text{ip}} \frac{\max(0, N_{\text{ip}} - 2)}{10}\right) \times \mu_{\text{high}}\right)$$
+where $N_d, N_c, N_{\text{ip}}$ are the distinct accounts linked to the device, payment card, and IP at timestamp $t$.
 
-#### Temporal Escalation Score ($S_{temp}$)
+#### Temporal Escalation Score ($S_{\text{temp}}$)
 Detects velocity acceleration and arrival bursts before ring saturation:
-$$S_{temp} = w_{dev} \\cdot \\text{clip}\\left(\\frac{N_{dev, 1h}}{3}, 0, 1\\right) + w_{ip} \\cdot \\text{clip}\\left(\\frac{\\max(0, N_{ip, 1h}-1)}{6}, 0, 1\\right) + w_{cr} \\cdot \\mathbb{I}_{\\text{new\\_account}}$$
+$$S_{\text{temp}} = w_{\text{dev}} \cdot \text{clip}\left(\frac{N_{\text{dev}, 1\text{h}}}{3}, 0, 1\right) + w_{\text{ip}} \cdot \text{clip}\left(\frac{\max(0, N_{\text{ip}, 1\text{h}}-1)}{6}, 0, 1\right) + w_{\text{cr}} \cdot \mathbb{I}(\text{new account})$$
 
 #### Deterministic Calibrated Fusion
-$$S_{final} = 100 \\times \\max\\Big(S_{beh}, \\; 0.30 \\cdot S_{beh} + 0.45 \\cdot S_{graph} + 0.25 \\cdot S_{temp}, \\; 0.50 \\cdot S_{graph} + 0.50 \\cdot S_{temp}\\Big)$$
+$$S_{\text{final}} = 100 \times \max\Big(S_{\text{beh}}, \; 0.30 \cdot S_{\text{beh}} + 0.45 \cdot S_{\text{graph}} + 0.25 \cdot S_{\text{temp}}, \; 0.50 \cdot S_{\text{graph}} + 0.50 \cdot S_{\text{temp}}\Big)$$
 
 ---
 
 ### 5. False-Positive & Business Cost Framework
-$$\\text{Total Expected Business Cost} = FP \\times \\text{cost}_{FP} + FN \\times \\text{cost}_{FN}$$
-- **$\\text{cost}_{FP}$ (₹150)**: Estimated merchant friction & manual review overhead per legitimate transaction held.
-- **$\\text{cost}_{FN}$ (₹2,500)**: Direct chargeback, merchandise loss, and scheme fees per unprevented fraud transaction.
+$$\text{Total Expected Business Cost} = \text{FP} \times \text{Cost}_{\text{FP}} + \text{FN} \times \text{Cost}_{\text{FN}}$$
+- **$\text{Cost}_{\text{FP}}$ (₹150)**: Estimated merchant friction & manual review overhead per legitimate transaction held.
+- **$\text{Cost}_{\text{FN}}$ (₹2,500)**: Direct chargeback, merchandise loss, and scheme fees per unprevented fraud transaction.
 - *Configured prototype assumptions — not realized production savings.*
 
 ---

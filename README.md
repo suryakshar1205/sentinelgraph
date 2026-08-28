@@ -170,20 +170,20 @@ LEAKAGE-SAFE FEATURE EXTRACTION (ZERO LOOKAHEAD)
 ### 3. Dynamic Entity Graph Engine (`graph/builder.py` & `graph/signals.py`)
 - Constructs an evolving bipartite network connecting customer accounts through shared physical devices, virtual cards, and IP subnets.
 - **Dynamic Graph Coordination Formulation**:
-  $$S_{graph} = \min\left(1.0, \; \left(w_d \frac{\max(0, N_d - 1)}{4} + w_c \frac{\max(0, N_c - 1)}{2} + w_{ip} \frac{\max(0, N_{ip} - 2)}{10}\right) \times \mu_{high}\right)$$
-  where $N_d, N_c, N_{ip}$ are the distinct accounts linked to the device, payment card, and IP at timestamp $t$.
+  $$S_{\text{graph}} = \min\left(1.0, \; \left(w_d \frac{\max(0, N_d - 1)}{4} + w_c \frac{\max(0, N_c - 1)}{2} + w_{\text{ip}} \frac{\max(0, N_{\text{ip}} - 2)}{10}\right) \times \mu_{\text{high}}\right)$$
+  where $N_d, N_c, N_{\text{ip}}$ are the distinct accounts linked to the device, payment card, and IP at timestamp $t$.
 
 ### 4. Temporal Escalation Engine (`temporal/escalation.py`)
 - Quantifies sudden velocity bursts and synchronized arrivals before ring saturation:
-  $$S_{temp} = w_{dev} \cdot \text{clip}\left(\frac{N_{dev, 1h}}{3}, 0, 1\right) + w_{ip} \cdot \text{clip}\left(\frac{\max(0, N_{ip, 1h}-1)}{6}, 0, 1\right) + w_{cr} \cdot \mathbb{I}_{\text{new\_account}}$$
+  $$S_{\text{temp}} = w_{\text{dev}} \cdot \text{clip}\left(\frac{N_{\text{dev}, 1\text{h}}}{3}, 0, 1\right) + w_{\text{ip}} \cdot \text{clip}\left(\frac{\max(0, N_{\text{ip}, 1\text{h}}-1)}{6}, 0, 1\right) + w_{\text{cr}} \cdot \mathbb{I}(\text{new account})$$
 
 ### 5. Deterministic Risk Fusion Engine (`fusion/risk.py`)
 - Combines behavioral, graph, and temporal signals into a calibrated score (0–100):
-  $$S_{final} = 100 \times \max\Big(S_{beh}, \; 0.30 \cdot S_{beh} + 0.45 \cdot S_{graph} + 0.25 \cdot S_{temp}, \; 0.50 \cdot S_{graph} + 0.50 \cdot S_{temp}\Big)$$
+  $$S_{\text{final}} = 100 \times \max\Big(S_{\text{beh}}, \; 0.30 \cdot S_{\text{beh}} + 0.45 \cdot S_{\text{graph}} + 0.25 \cdot S_{\text{temp}}, \; 0.50 \cdot S_{\text{graph}} + 0.50 \cdot S_{\text{temp}}\Big)$$
 - Produces defensive action:
-  - `HOLD`: $S_{final} \ge 75$ or ($S_{graph} \ge 60$ and $S_{temp} \ge 50$)
-  - `REVIEW`: $45 \le S_{final} < 75$
-  - `ALLOW`: $S_{final} < 45$
+  - `HOLD`: $S_{\text{final}} \ge 75$ or ($S_{\text{graph}} \ge 60$ and $S_{\text{temp}} \ge 50$)
+  - `REVIEW`: $45 \le S_{\text{final}} < 75$
+  - `ALLOW`: $S_{\text{final}} < 45$
 
 ### 6. AI Evidence Reasoning Layer (`llm/explainer.py`)
 - Evaluates **Evidence Sufficiency**:
